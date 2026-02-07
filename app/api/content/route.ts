@@ -1,32 +1,17 @@
-import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { Redis } from "@upstash/redis";
+import { NextResponse } from "next/server";
 
-const contentPath = path.join(process.cwd(), 'data', 'content.json');
+const redis = Redis.fromEnv();
 
-// GET - Fetch content
-export async function GET() {
-  try {
-    const content = JSON.parse(fs.readFileSync(contentPath, 'utf-8'));
-    return NextResponse.json(content);
-  } catch (error) {
-    return NextResponse.json(
-      { message: 'Failed to fetch content' },
-      { status: 500 }
-    );
-  }
+export async function POST(req: Request) {
+  const body = await req.json();
+
+  await redis.set("portfolio-content", body);
+
+  return NextResponse.json({ success: true });
 }
 
-// POST - Update content
-export async function POST(request: NextRequest) {
-  try {
-    const data = await request.json();
-    fs.writeFileSync(contentPath, JSON.stringify(data, null, 2));
-    return NextResponse.json({ message: 'Content updated successfully' });
-  } catch (error) {
-    return NextResponse.json(
-      { message: 'Failed to update content' },
-      { status: 500 }
-    );
-  }
+export async function GET() {
+  const data = await redis.get("portfolio-content");
+  return NextResponse.json(data ?? {});
 }
