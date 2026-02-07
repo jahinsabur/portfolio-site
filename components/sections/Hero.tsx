@@ -70,7 +70,7 @@ export default function Hero() {
               className="btn-secondary flex items-center gap-2"
             >
               <Download size={20} />
-              Download CV
+              Download CVCVCVCV
             </a>
             <a
               href="#contact"
