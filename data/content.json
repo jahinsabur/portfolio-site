@@ -93,14 +93,34 @@
     ]
   },
   "sensoreact": {
+    "title": "Sensoreact",
+    "subtitle": "Professional sensor solutions and IoT platforms for industry",
     "description": "Sensoreact is a technology company I founded to deliver enterprise-grade sensor systems and IoT infrastructure. We specialize in custom hardware design, embedded firmware, and cloud-connected monitoring platforms.",
     "features": [
-      "Industrial sensor networks for predictive maintenance",
-      "Agricultural monitoring systems with AI-driven insights",
-      "Energy management platforms for solar installations",
-      "Custom PCB design and low-volume manufacturing",
-      "Wireless mesh networks (LoRaWAN, Zigbee)",
-      "Cloud dashboards with real-time analytics"
+      {
+        "title": "Custom Sensor Solutions",
+        "description": "Tailored hardware and firmware for specific industrial applications"
+      },
+      {
+        "title": "IoT Platform",
+        "description": "End-to-end connectivity from edge devices to cloud analytics"
+      },
+      {
+        "title": "Real-Time Monitoring",
+        "description": "Live dashboards and alerts for critical system parameters"
+      },
+      {
+        "title": "Industrial sensor networks for predictive maintenance",
+        "description": ""
+      },
+      {
+        "title": "Agricultural monitoring systems with AI-driven insights",
+        "description": ""
+      },
+      {
+        "title": "Energy management platforms for solar installations",
+        "description": ""
+      }
     ],
     "websiteUrl": "https://sensoreact.com"
   },
@@ -134,5 +154,8 @@
       "url": "https://youtube.com/@yourusername",
       "icon": "youtube"
     }
-  ]
+  ],
+  "footer": {
+    "copyrightText": "© 2026 Sensoreact. Designed and built in India. All rights reserved."
+  }
 }

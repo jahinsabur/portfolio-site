@@ -16,6 +16,7 @@ import {
   SensoreactEditor,
   ContactEditor,
   LinksEditor,
+  FooterEditor,
 } from './editors';
 
 export default function AdminDashboard() {
@@ -80,6 +81,7 @@ export default function AdminDashboard() {
     { id: 'sensoreact', label: 'Sensoreact', icon: Building },
     { id: 'contact', label: 'Contact', icon: Mail },
     { id: 'links', label: 'Social Links', icon: Link },
+    { id: 'footer', label: 'Footer', icon: FileText },
   ];
 
   return (
@@ -152,6 +154,7 @@ export default function AdminDashboard() {
               {activeTab === 'sensoreact' && <SensoreactEditor content={content} setContent={setContent} />}
               {activeTab === 'contact' && <ContactEditor content={content} setContent={setContent} />}
               {activeTab === 'links' && <LinksEditor content={content} setContent={setContent} />}
+              {activeTab === 'footer' && <FooterEditor content={content} setContent={setContent} />}
             </div>
           </div>
         </div>

@@ -1,3 +1,5 @@
+import { Plus, Trash2 } from 'lucide-react';
+
 export default function AboutEditor({ content, setContent }: any) {
   const updateAbout = (field: string, value: any) => {
     setContent({
@@ -9,6 +11,21 @@ export default function AboutEditor({ content, setContent }: any) {
   const updateHighlight = (index: number, field: string, value: string) => {
     const updated = [...(content.about?.highlights || [])];
     updated[index] = { ...updated[index], [field]: value };
+    updateAbout('highlights', updated);
+  };
+
+  const addHighlight = () => {
+    const updated = [...(content.about?.highlights || [])];
+    updated.push({
+      title: 'New Highlight',
+      description: 'Description here'
+    });
+    updateAbout('highlights', updated);
+  };
+
+  const deleteHighlight = (index: number) => {
+    const updated = [...(content.about?.highlights || [])];
+    updated.splice(index, 1);
     updateAbout('highlights', updated);
   };
 
@@ -42,13 +59,31 @@ export default function AboutEditor({ content, setContent }: any) {
       </div>
 
       <div>
-        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
-          Highlight Cards
-        </h3>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+            Highlight Cards
+          </h3>
+          <button
+            onClick={addHighlight}
+            className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-sm font-medium transition-all"
+          >
+            <Plus size={18} />
+            Add Highlight
+          </button>
+        </div>
         <div className="space-y-4">
           {content.about?.highlights?.map((highlight: any, index: number) => (
             <div key={index} className="border border-slate-200 dark:border-slate-700 rounded-lg p-4 space-y-3">
-              <h4 className="font-medium text-slate-900 dark:text-white">Highlight {index + 1}</h4>
+              <div className="flex items-center justify-between">
+                <h4 className="font-medium text-slate-900 dark:text-white">Highlight {index + 1}</h4>
+                <button
+                  onClick={() => deleteHighlight(index)}
+                  className="p-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all"
+                  title="Delete highlight"
+                >
+                  <Trash2 size={18} />
+                </button>
+              </div>
               <div>
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   Title
