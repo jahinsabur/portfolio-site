@@ -6,6 +6,7 @@ import { Mail, MapPin, Send } from 'lucide-react';
 
 export default function Contact() {
   const [content, setContent] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,7 +18,9 @@ export default function Contact() {
       .then((res) => res.json())
       .then((data) => {
         setContent(data.contact);
-      });
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -32,6 +35,21 @@ export default function Contact() {
       [e.target.name]: e.target.value,
     });
   };
+
+  if (loading) {
+    return (
+      <section id="contact" className="section-container bg-slate-50 dark:bg-slate-900">
+        <div className="max-w-6xl mx-auto animate-pulse">
+          <div className="h-10 bg-slate-200 dark:bg-slate-800 rounded w-64 mx-auto mb-4"></div>
+          <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded w-96 mx-auto mb-12"></div>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="h-96 bg-slate-200 dark:bg-slate-800 rounded"></div>
+            <div className="h-96 bg-slate-200 dark:bg-slate-800 rounded"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   if (!content) return null;
 

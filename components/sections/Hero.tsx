@@ -6,12 +6,35 @@ import { Download, Mail, ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   const [content, setContent] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/content')
       .then((res) => res.json())
-      .then((data) => setContent(data.hero));
+      .then((data) => {
+        setContent(data.hero);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, []);
+
+  if (loading) {
+    return (
+      <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 pt-16">
+        <div className="section-container">
+          <div className="max-w-4xl mx-auto text-center animate-pulse">
+            <div className="h-16 bg-slate-200 dark:bg-slate-800 rounded w-96 mx-auto mb-6"></div>
+            <div className="h-10 bg-slate-200 dark:bg-slate-800 rounded w-80 mx-auto mb-8"></div>
+            <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded w-full max-w-3xl mx-auto mb-12"></div>
+            <div className="flex gap-4 justify-center">
+              <div className="h-12 bg-slate-200 dark:bg-slate-800 rounded w-40"></div>
+              <div className="h-12 bg-slate-200 dark:bg-slate-800 rounded w-40"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   if (!content) return null;
 

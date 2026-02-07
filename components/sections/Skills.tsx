@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 export default function Skills() {
   const [skills, setSkills] = useState<any>({});
   const [experience, setExperience] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/content')
@@ -13,8 +14,26 @@ export default function Skills() {
       .then((data) => {
         setSkills(data.skills || {});
         setExperience(data.experience || []);
-      });
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, []);
+
+  if (loading) {
+    return (
+      <section id="skills" className="section-container bg-white dark:bg-slate-950">
+        <div className="max-w-7xl mx-auto animate-pulse">
+          <div className="h-10 bg-slate-200 dark:bg-slate-800 rounded w-64 mx-auto mb-4"></div>
+          <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded w-96 mx-auto mb-12"></div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="h-48 bg-slate-200 dark:bg-slate-800 rounded"></div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="skills" className="section-container bg-white dark:bg-slate-950">

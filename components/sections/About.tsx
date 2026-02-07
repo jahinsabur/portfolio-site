@@ -13,12 +13,32 @@ const iconMap: any = {
 
 export default function About() {
   const [content, setContent] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/content')
       .then((res) => res.json())
-      .then((data) => setContent(data.about));
+      .then((data) => {
+        setContent(data.about);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, []);
+
+  if (loading) {
+    return (
+      <section id="about" className="section-container bg-white dark:bg-slate-950">
+        <div className="max-w-6xl mx-auto animate-pulse">
+          <div className="h-10 bg-slate-200 dark:bg-slate-800 rounded w-48 mx-auto mb-4"></div>
+          <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded w-96 mx-auto mb-12"></div>
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="h-64 bg-slate-200 dark:bg-slate-800 rounded"></div>
+            <div className="h-64 bg-slate-200 dark:bg-slate-800 rounded"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   if (!content) return null;
 

@@ -24,12 +24,32 @@ const defaultFeatures = [
 
 export default function Sensoreact() {
   const [content, setContent] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/content')
       .then((res) => res.json())
-      .then((data) => setContent(data.sensoreact));
+      .then((data) => {
+        setContent(data.sensoreact);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, []);
+
+  if (loading) {
+    return (
+      <section id="sensoreact" className="section-container bg-gradient-to-br from-primary-50 via-white to-cyan-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+        <div className="max-w-6xl mx-auto animate-pulse">
+          <div className="h-10 bg-slate-200 dark:bg-slate-800 rounded w-64 mx-auto mb-4"></div>
+          <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded w-96 mx-auto mb-12"></div>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="h-96 bg-slate-200 dark:bg-slate-800 rounded"></div>
+            <div className="h-96 bg-slate-200 dark:bg-slate-800 rounded"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   if (!content) return null;
 

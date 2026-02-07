@@ -2,16 +2,39 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, ArrowRight } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
 
 export default function Projects() {
   const [projects, setProjects] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/content')
       .then((res) => res.json())
-      .then((data) => setProjects(data.projects || []));
+      .then((data) => {
+        setProjects(data.projects || []);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, []);
+
+  if (loading) {
+    return (
+      <section id="projects" className="section-container bg-slate-50 dark:bg-slate-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="animate-pulse">
+            <div className="h-10 bg-slate-200 dark:bg-slate-800 rounded w-64 mx-auto mb-4"></div>
+            <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded w-96 mx-auto mb-12"></div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="card h-96 bg-slate-200 dark:bg-slate-800"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="projects" className="section-container bg-slate-50 dark:bg-slate-900">
@@ -30,9 +53,11 @@ export default function Projects() {
 
         {projects.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-slate-600 dark:text-slate-400">
-              No projects yet. Add projects from the admin panel!
-            </p>
+            <div className="inline-block px-6 py-3 bg-slate-200 dark:bg-slate-800 rounded-lg">
+              <p className="text-slate-600 dark:text-slate-400">
+                Projects will appear here once added
+              </p>
+            </div>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
