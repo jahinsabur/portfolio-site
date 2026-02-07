@@ -1,7 +1,7 @@
 import { Plus, Trash2 } from 'lucide-react';
 
 export default function SkillsEditor({ content, setContent }: any) {
-  const skills = Array.isArray(content.skills) ? content.skills : [];
+  const skills: string[] = Array.isArray(content.skills) ? content.skills : [];
 
   const addSkill = () => {
     const newSkill = prompt('Enter skill name:');
@@ -66,7 +66,7 @@ export default function SkillsEditor({ content, setContent }: any) {
           Individual Skills ({skills.length})
         </h3>
         <div className="grid md:grid-cols-2 gap-3 max-h-96 overflow-y-auto">
-          {skills.map((skill, index) => (
+          {skills.map((skill: string, index: number) => (
             <div key={index} className="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 rounded-lg p-3">
               <input
                 type="text"

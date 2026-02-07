@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { User, Lock, Save, Eye, EyeOff } from 'lucide-react';
+import { User, Lock, Save, Eye, EyeOff, Upload, FileText, Download } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export default function SettingsEditor() {
   const [adminData, setAdminData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   
@@ -16,6 +17,7 @@ export default function SettingsEditor() {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [cvFileName, setCvFileName] = useState('cv.pdf');
 
   useEffect(() => {
     fetchAdminData();
@@ -102,6 +104,44 @@ export default function SettingsEditor() {
     }
   };
 
+  const handleCVUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.type !== 'application/pdf') {
+      toast.error('Please upload a PDF file');
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('File size must be less than 5MB');
+      return;
+    }
+
+    setUploading(true);
+    const formData = new FormData();
+    formData.append('cv', file);
+
+    try {
+      const res = await fetch('/api/admin/upload-cv', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setCvFileName(data.filename);
+        toast.success('CV uploaded successfully!');
+      } else {
+        toast.error('Failed to upload CV');
+      }
+    } catch (error) {
+      toast.error('An error occurred');
+    } finally {
+      setUploading(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
@@ -162,6 +202,55 @@ export default function SettingsEditor() {
             <Save size={18} />
             {saving ? 'Saving...' : 'Save Profile'}
           </button>
+        </div>
+      </div>
+
+      {/* CV Upload */}
+      <div className="card">
+        <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+          <FileText size={24} />
+          CV / Resume
+        </h3>
+        
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              Upload CV (PDF)
+            </label>
+            <div className="flex items-center gap-4">
+              <label className="flex-1 cursor-pointer">
+                <div className="flex items-center gap-3 px-4 py-3 bg-slate-50 dark:bg-slate-700 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-lg hover:border-primary-500 dark:hover:border-primary-500 transition-all">
+                  <Upload size={20} className="text-slate-400" />
+                  <span className="text-slate-600 dark:text-slate-400">
+                    {uploading ? 'Uploading...' : 'Choose PDF file'}
+                  </span>
+                </div>
+                <input
+                  type="file"
+                  accept=".pdf"
+                  onChange={handleCVUpload}
+                  disabled={uploading}
+                  className="hidden"
+                />
+              </label>
+              <a
+                href="/cv.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-3 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded-lg transition-all"
+                title="Preview current CV"
+              >
+                <Download size={20} />
+                Preview
+              </a>
+            </div>
+            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+              Current file: <span className="font-mono">{cvFileName}</span> • Max size: 5MB
+            </p>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+              This CV will be available for download on your portfolio website
+            </p>
+          </div>
         </div>
       </div>
 
