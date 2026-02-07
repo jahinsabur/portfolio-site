@@ -6,28 +6,37 @@ import { Github, ExternalLink } from 'lucide-react';
 
 export default function Projects() {
   const [projects, setProjects] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 2000);
+
     fetch('/api/content')
       .then((res) => res.json())
       .then((data) => {
         setProjects(data.projects || []);
-        setLoading(false);
+        setIsLoading(false);
+        clearTimeout(timer);
       })
-      .catch(() => setLoading(false));
+      .catch(() => {
+        setIsLoading(false);
+        clearTimeout(timer);
+      });
+
+    return () => clearTimeout(timer);
   }, []);
 
-  if (loading) {
+  // Show loading skeleton
+  if (isLoading) {
     return (
       <section id="projects" className="section-container bg-slate-50 dark:bg-slate-900">
         <div className="max-w-7xl mx-auto">
-          <div className="animate-pulse">
-            <div className="h-10 bg-slate-200 dark:bg-slate-800 rounded w-64 mx-auto mb-4"></div>
-            <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded w-96 mx-auto mb-12"></div>
+          <div className="animate-pulse space-y-8">
+            <div className="h-10 bg-slate-200 dark:bg-slate-800 rounded-lg w-64 mx-auto"></div>
+            <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded-lg w-96 mx-auto"></div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="card h-96 bg-slate-200 dark:bg-slate-800"></div>
+                <div key={i} className="h-96 bg-slate-200 dark:bg-slate-800 rounded-lg"></div>
               ))}
             </div>
           </div>
@@ -36,6 +45,7 @@ export default function Projects() {
     );
   }
 
+  // Always show the section, even if empty
   return (
     <section id="projects" className="section-container bg-slate-50 dark:bg-slate-900">
       <div className="max-w-7xl mx-auto">

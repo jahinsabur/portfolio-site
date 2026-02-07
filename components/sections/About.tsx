@@ -13,27 +13,41 @@ const iconMap: any = {
 
 export default function About() {
   const [content, setContent] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 2000);
+
     fetch('/api/content')
       .then((res) => res.json())
       .then((data) => {
         setContent(data.about);
-        setLoading(false);
+        setIsLoading(false);
+        clearTimeout(timer);
       })
-      .catch(() => setLoading(false));
+      .catch(() => {
+        setIsLoading(false);
+        clearTimeout(timer);
+      });
+
+    return () => clearTimeout(timer);
   }, []);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <section id="about" className="section-container bg-white dark:bg-slate-950">
-        <div className="max-w-6xl mx-auto animate-pulse">
-          <div className="h-10 bg-slate-200 dark:bg-slate-800 rounded w-48 mx-auto mb-4"></div>
-          <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded w-96 mx-auto mb-12"></div>
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div className="h-64 bg-slate-200 dark:bg-slate-800 rounded"></div>
-            <div className="h-64 bg-slate-200 dark:bg-slate-800 rounded"></div>
+        <div className="max-w-6xl mx-auto">
+          <div className="animate-pulse space-y-8">
+            <div className="h-10 bg-slate-200 dark:bg-slate-800 rounded-lg w-48 mx-auto"></div>
+            <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded-lg w-96 mx-auto"></div>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-4">
+                <div className="h-4 bg-slate-200 dark:bg-slate-800 rounded w-full"></div>
+                <div className="h-4 bg-slate-200 dark:bg-slate-800 rounded w-5/6"></div>
+                <div className="h-4 bg-slate-200 dark:bg-slate-800 rounded w-full"></div>
+              </div>
+              <div className="h-64 bg-slate-200 dark:bg-slate-800 rounded-lg"></div>
+            </div>
           </div>
         </div>
       </section>

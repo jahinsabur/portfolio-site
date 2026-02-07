@@ -22,19 +22,14 @@ const iconMap: any = {
 
 export default function Links() {
   const [links, setLinks] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/content')
       .then((res) => res.json())
-      .then((data) => {
-        setLinks(data.links || []);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
+      .then((data) => setLinks(data.links || []))
+      .catch(() => {});
   }, []);
 
-  if (loading) return null;
   if (links.length === 0) return null;
 
   return (
