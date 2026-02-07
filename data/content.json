@@ -108,6 +108,18 @@
       {
         "title": "Real-Time Monitoring",
         "description": "Live dashboards and alerts for critical system parameters"
+      },
+      {
+        "title": "Industrial sensor networks for predictive maintenance",
+        "description": ""
+      },
+      {
+        "title": "Agricultural monitoring systems with AI-driven insights",
+        "description": ""
+      },
+      {
+        "title": "Energy management platforms for solar installations",
+        "description": ""
       }
     ],
     "websiteUrl": "https://sensoreact.com"

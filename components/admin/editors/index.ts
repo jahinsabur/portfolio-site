@@ -7,3 +7,4 @@ export { default as SensoreactEditor } from './SensoreactEditor';
 export { default as ContactEditor } from './ContactEditor';
 export { default as LinksEditor } from './LinksEditor';
 export { default as FooterEditor } from './FooterEditor';
+export { default as SettingsEditor } from './SettingsEditor';

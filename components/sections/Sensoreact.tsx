@@ -75,72 +75,29 @@ export default function Sensoreact() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="space-y-6"
+            className="space-y-8"
           >
-            <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+            <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed text-center whitespace-pre-line">
               {content.description}
             </p>
 
-            {features.length > 0 && features.slice(0, 3).map((feature: any, index: number) => {
-              const Icon = defaultIconMap[feature.title] || Cpu;
-              return (
-                <div key={index} className="flex items-start gap-4">
-                  <div className="p-3 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex-shrink-0">
-                    <Icon size={24} className="text-primary-600 dark:text-primary-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900 dark:text-white mb-1">
-                      {feature.title}
-                    </h4>
-                    {feature.description && (
-                      <p className="text-sm text-slate-600 dark:text-slate-400">
-                        {feature.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-
-            {content.websiteUrl && (
-              <a
-                href={content.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 btn-primary group"
-              >
-                Visit Sensoreact Website
-                <ExternalLink
-                  size={20}
-                  className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
-                />
-              </a>
-            )}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative"
-          >
+            {/* All 6 features in a card */}
             <div className="card bg-gradient-to-br from-primary-600 to-cyan-600 dark:from-primary-700 dark:to-cyan-700 text-white p-8">
-              <h3 className="text-2xl font-bold mb-4">What We Build</h3>
-              <ul className="space-y-3">
+              <h3 className="text-2xl font-bold mb-6 text-center">What We Build</h3>
+              <ul className="space-y-4">
                 {features.map((feature: any, index: number) => (
                   <li key={index} className="flex items-start gap-3">
-                    <span className="text-cyan-200 mt-1">▸</span>
+                    <span className="text-cyan-200 mt-1 text-xl">▸</span>
                     <div>
-                      <span className="text-white font-medium">{feature.title}</span>
+                      <span className="text-white font-semibold text-lg">{feature.title}</span>
                       {feature.description && (
-                        <p className="text-white/80 text-sm mt-1">{feature.description}</p>
+                        <p className="text-white/90 text-sm mt-1">{feature.description}</p>
                       )}
                     </div>
                   </li>
@@ -148,9 +105,22 @@ export default function Sensoreact() {
               </ul>
             </div>
 
-            {/* Decorative Elements */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary-200 dark:bg-primary-800 rounded-full blur-2xl opacity-50" />
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-cyan-200 dark:bg-cyan-800 rounded-full blur-2xl opacity-50" />
+            {content.websiteUrl && (
+              <div className="text-center">
+                <a
+                  href={content.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 btn-primary group"
+                >
+                  Visit Sensoreact Website
+                  <ExternalLink
+                    size={20}
+                    className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+                  />
+                </a>
+              </div>
+            )}
           </motion.div>
         </div>
       </div>
