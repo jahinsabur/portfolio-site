@@ -1,0 +1,138 @@
+{
+  "hero": {
+    "name": "Your Name",
+    "title": "Electronics & Electrical Engineer",
+    "subtitle": "Embedded Systems | IoT | Automation",
+    "description": "Building intelligent, sensor-driven systems that bridge the physical and digital worlds. Specialized in embedded hardware, IoT architectures, and renewable energy solutions for real-world impact."
+  },
+  "about": {
+    "summary": "I'm an Electronics & Electrical Engineer specializing in embedded systems, IoT, and renewable energy solutions. My work focuses on designing sensor-driven systems that solve real-world problems—from solar-powered EV charging stations to industrial predictive maintenance networks.",
+    "focusAreas": [
+      "Embedded firmware development (C/C++, Python)",
+      "Custom PCB design and prototyping",
+      "Sensor integration and signal processing",
+      "IoT architectures and cloud connectivity",
+      "Solar energy systems and battery management",
+      "Vehicle electronics and automotive systems"
+    ],
+    "highlights": [
+      {
+        "title": "Hands-On Engineering",
+        "description": "From schematic to PCB to production—I build systems that work in the real world, not just simulations."
+      },
+      {
+        "title": "Full-Stack Embedded",
+        "description": "Comfortable across the entire stack: firmware, hardware design, cloud integration, and data pipelines."
+      },
+      {
+        "title": "Power & Energy Systems",
+        "description": "Deep expertise in solar energy, battery management, and power electronics for sustainable solutions."
+      },
+      {
+        "title": "Problem-Solver Mindset",
+        "description": "Every project starts with a real problem. I focus on practical, deployable solutions with measurable impact."
+      }
+    ]
+  },
+  "experience": [
+    {
+      "title": "Founder & Lead Engineer",
+      "company": "Sensoreact",
+      "period": "2023 - Present",
+      "description": "Building next-generation sensor solutions and IoT platforms for industrial and consumer applications.",
+      "achievements": [
+        "Developed proprietary sensor fusion algorithms",
+        "Designed custom PCBs for production deployment",
+        "Established partnerships with manufacturing clients"
+      ]
+    },
+    {
+      "title": "Embedded Systems Engineer",
+      "company": "Freelance / Contract Work",
+      "period": "2021 - 2023",
+      "description": "Designed and deployed embedded solutions for automotive, industrial, and renewable energy sectors.",
+      "achievements": [
+        "Led development of vehicle telematics platform",
+        "Reduced power consumption by 40% through optimization",
+        "Mentored junior engineers in embedded best practices"
+      ]
+    }
+  ],
+  "projects": [],
+  "skills": {
+    "Embedded Systems": [
+      "ARM Cortex-M",
+      "ESP32/ESP8266",
+      "Raspberry Pi",
+      "Arduino",
+      "STM32",
+      "RTOS (FreeRTOS)",
+      "Embedded C/C++"
+    ],
+    "Sensors & Instrumentation": [
+      "Temperature & Humidity",
+      "Pressure & Flow",
+      "Accelerometer & Gyroscope",
+      "Gas & Air Quality",
+      "Optical Sensors"
+    ],
+    "Communication Protocols": [
+      "UART/SPI/I2C",
+      "CAN Bus",
+      "MQTT",
+      "LoRaWAN",
+      "BLE",
+      "Wi-Fi"
+    ],
+    "Power & Solar": [
+      "Solar Panel Design",
+      "MPPT Controllers",
+      "Battery Management Systems",
+      "DC-DC Converters",
+      "Power Electronics"
+    ]
+  },
+  "sensoreact": {
+    "description": "Sensoreact is a technology company I founded to deliver enterprise-grade sensor systems and IoT infrastructure. We specialize in custom hardware design, embedded firmware, and cloud-connected monitoring platforms.",
+    "features": [
+      "Industrial sensor networks for predictive maintenance",
+      "Agricultural monitoring systems with AI-driven insights",
+      "Energy management platforms for solar installations",
+      "Custom PCB design and low-volume manufacturing",
+      "Wireless mesh networks (LoRaWAN, Zigbee)",
+      "Cloud dashboards with real-time analytics"
+    ],
+    "websiteUrl": "https://sensoreact.com"
+  },
+  "contact": {
+    "email": "your.email@example.com",
+    "location": "Your City, Country"
+  },
+  "links": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/yourusername",
+      "icon": "github"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://linkedin.com/in/yourusername",
+      "icon": "linkedin"
+    },
+    {
+      "name": "Hackster",
+      "url": "https://hackster.io/yourusername",
+      "icon": "globe"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://instagram.com/yourusername",
+      "icon": "instagram"
+    },
+    {
+      "name": "YouTube",
+      "url": "https://youtube.com/@yourusername",
+      "icon": "youtube"
+    }
+  ]
+}
