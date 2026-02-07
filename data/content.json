@@ -59,39 +59,39 @@
     }
   ],
   "projects": [],
-  "skills": {
-    "Embedded Systems": [
-      "ARM Cortex-M",
-      "ESP32/ESP8266",
-      "Raspberry Pi",
-      "Arduino",
-      "STM32",
-      "RTOS (FreeRTOS)",
-      "Embedded C/C++"
-    ],
-    "Sensors & Instrumentation": [
-      "Temperature & Humidity",
-      "Pressure & Flow",
-      "Accelerometer & Gyroscope",
-      "Gas & Air Quality",
-      "Optical Sensors"
-    ],
-    "Communication Protocols": [
-      "UART/SPI/I2C",
-      "CAN Bus",
-      "MQTT",
-      "LoRaWAN",
-      "BLE",
-      "Wi-Fi"
-    ],
-    "Power & Solar": [
-      "Solar Panel Design",
-      "MPPT Controllers",
-      "Battery Management Systems",
-      "DC-DC Converters",
-      "Power Electronics"
-    ]
-  },
+  "skills": [
+    "ARM Cortex-M",
+    "ESP32/ESP8266",
+    "Raspberry Pi",
+    "Arduino",
+    "STM32",
+    "RTOS (FreeRTOS)",
+    "Embedded C/C++",
+    "Python",
+    "Temperature & Humidity Sensors",
+    "Pressure & Flow Sensors",
+    "Accelerometer & Gyroscope",
+    "Gas & Air Quality Sensors",
+    "Optical Sensors",
+    "UART/SPI/I2C",
+    "CAN Bus",
+    "MQTT",
+    "LoRaWAN",
+    "BLE",
+    "Wi-Fi",
+    "Solar Panel Design",
+    "MPPT Controllers",
+    "Battery Management Systems",
+    "DC-DC Converters",
+    "Power Electronics",
+    "PCB Design",
+    "KiCad",
+    "Altium",
+    "Git",
+    "Docker",
+    "Node.js",
+    "React"
+  ],
   "sensoreact": {
     "title": "Sensoreact",
     "subtitle": "Professional sensor solutions and IoT platforms for industry",
@@ -108,18 +108,6 @@
       {
         "title": "Real-Time Monitoring",
         "description": "Live dashboards and alerts for critical system parameters"
-      },
-      {
-        "title": "Industrial sensor networks for predictive maintenance",
-        "description": ""
-      },
-      {
-        "title": "Agricultural monitoring systems with AI-driven insights",
-        "description": ""
-      },
-      {
-        "title": "Energy management platforms for solar installations",
-        "description": ""
       }
     ],
     "websiteUrl": "https://sensoreact.com"
