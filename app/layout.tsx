@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const inter = Inter({ 
-  subsets: ["latin"],
-  variable: '--font-inter',
-});
+// Using system fonts for display until Clash Display is installed
+// To install: Download from https://www.fontshare.com/fonts/clash-display
+// Place ClashDisplay-Variable.woff2 in public/fonts/ and uncomment below
 
-const poppins = Poppins({ 
-  weight: ['400', '500', '600', '700'],
+const jetbrainsMono = JetBrains_Mono({ 
   subsets: ["latin"],
-  variable: '--font-poppins',
+  variable: '--font-mono',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -42,7 +43,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${poppins.variable} font-sans antialiased`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
+      <body className={`${GeistSans.variable} ${GeistMono.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider>
           <Navbar />
           <main className="min-h-screen">

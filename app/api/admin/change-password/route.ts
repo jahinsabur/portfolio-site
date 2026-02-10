@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { Redis } from '@upstash/redis';
 
-const adminPath = path.join(process.cwd(), 'data', 'admin.json');
+const redis = Redis.fromEnv();
 
 // POST - Change password
 export async function POST(request: NextRequest) {
@@ -24,7 +23,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Read current data
-    const currentData = JSON.parse(fs.readFileSync(adminPath, 'utf-8'));
+    const currentData = await redis.get('portfolio-admin') as any;
+    if (!currentData) {
+      return NextResponse.json(
+        { message: 'Admin data not found' },
+        { status: 404 }
+      );
+    }
     
     // Verify current password
     if (currentData.password !== currentPassword) {
@@ -40,10 +45,11 @@ export async function POST(request: NextRequest) {
       password: newPassword,
     };
 
-    fs.writeFileSync(adminPath, JSON.stringify(updatedData, null, 2));
+    await redis.set('portfolio-admin', updatedData);
     
     return NextResponse.json({ message: 'Password changed successfully' });
   } catch (error) {
+    console.error('Password change error:', error);
     return NextResponse.json(
       { message: 'Failed to change password' },
       { status: 500 }

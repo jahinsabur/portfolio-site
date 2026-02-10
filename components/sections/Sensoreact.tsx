@@ -66,10 +66,12 @@ export default function Sensoreact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <div className="inline-block px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-semibold mb-4">
-            FOUNDER & CREATOR
-          </div>
           <h2 className="section-title">{content.title || 'Sensoreact'}</h2>
+          <div className="flex justify-center mt-4 mb-4">
+            <div className="px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-semibold uppercase tracking-wider">
+              FOUNDER & DEVELOPER
+            </div>
+          </div>
           <p className="section-subtitle mx-auto">
             {content.subtitle || 'Professional sensor solutions and IoT platforms for industry'}
           </p>
@@ -86,24 +88,6 @@ export default function Sensoreact() {
             <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed text-center whitespace-pre-line">
               {content.description}
             </p>
-
-            {/* All 6 features in a card */}
-            <div className="card bg-gradient-to-br from-primary-600 to-cyan-600 dark:from-primary-700 dark:to-cyan-700 text-white p-8">
-              <h3 className="text-2xl font-bold mb-6 text-center">What We Build</h3>
-              <ul className="space-y-4">
-                {features.map((feature: any, index: number) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <span className="text-cyan-200 mt-1 text-xl">▸</span>
-                    <div>
-                      <span className="text-white font-semibold text-lg">{feature.title}</span>
-                      {feature.description && (
-                        <p className="text-white/90 text-sm mt-1">{feature.description}</p>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
 
             {content.websiteUrl && (
               <div className="text-center">

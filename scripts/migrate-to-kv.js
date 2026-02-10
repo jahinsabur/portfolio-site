@@ -8,6 +8,9 @@
 const fs = require('fs');
 const path = require('path');
 
+// Load environment variables from .env.local
+require('dotenv').config({ path: path.join(__dirname, '..', '.env.local') });
+
 async function migrate() {
   try {
     let redis = null;
@@ -38,6 +41,7 @@ async function migrate() {
 
     // Read content.json
     const contentPath = path.join(__dirname, '..', 'data', 'content.json');
+    const adminPath = path.join(__dirname, '..', 'data', 'admin.json');
     
     if (!fs.existsSync(contentPath)) {
       console.error('❌ Error: data/content.json not found');
@@ -45,21 +49,29 @@ async function migrate() {
     }
 
     const content = JSON.parse(fs.readFileSync(contentPath, 'utf-8'));
-
-    console.log(`📤 Uploading content to ${dbType}...`);
     
-    // Upload to database
+    console.log(`📤 Uploading content to ${dbType}...`);
     await redis.set('portfolio-content', content);
+    console.log('✅ Content uploaded!');
+
+    // Upload admin data if exists
+    if (fs.existsSync(adminPath)) {
+      const admin = JSON.parse(fs.readFileSync(adminPath, 'utf-8'));
+      console.log(`📤 Uploading admin data to ${dbType}...`);
+      await redis.set('portfolio-admin', admin);
+      console.log('✅ Admin data uploaded!');
+    }
 
     console.log('✅ Migration successful!');
-    console.log('📊 Data uploaded:', Object.keys(content).join(', '));
+    console.log('📊 Content data uploaded:', Object.keys(content).join(', '));
     
     // Verify
     const stored = await redis.get('portfolio-content');
-    if (stored) {
-      console.log(`✅ Verification successful - data is stored in ${dbType}`);
+    const storedAdmin = await redis.get('portfolio-admin');
+    if (stored && storedAdmin) {
+      console.log(`✅ Verification successful - all data is stored in ${dbType}`);
     } else {
-      console.log('⚠️  Warning: Could not verify stored data');
+      console.log('⚠️  Warning: Could not verify all stored data');
     }
 
   } catch (error) {

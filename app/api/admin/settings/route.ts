@@ -1,17 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { Redis } from '@upstash/redis';
 
-const adminPath = path.join(process.cwd(), 'data', 'admin.json');
+const redis = Redis.fromEnv();
 
 // GET - Fetch admin settings
 export async function GET() {
   try {
-    const data = JSON.parse(fs.readFileSync(adminPath, 'utf-8'));
+    const data = await redis.get('portfolio-admin');
+    if (!data) {
+      return NextResponse.json(
+        { message: 'Admin data not found' },
+        { status: 404 }
+      );
+    }
     // Don't send password to frontend
-    const { password, ...safeData } = data;
+    const { password, ...safeData } = data as any;
     return NextResponse.json(safeData);
   } catch (error) {
+    console.error('Settings fetch error:', error);
     return NextResponse.json(
       { message: 'Failed to fetch settings' },
       { status: 500 }
@@ -22,7 +28,10 @@ export async function GET() {
 // POST - Update admin settings (name and username only)
 export async function POST(request: NextRequest) {
   try {
-    const { name, username } = await request.json();
+    const body = await request.json();
+    const { name, username } = body;
+    
+    console.log('Received settings update:', { name, username });
     
     if (!name || !username) {
       return NextResponse.json(
@@ -32,7 +41,15 @@ export async function POST(request: NextRequest) {
     }
 
     // Read current data
-    const currentData = JSON.parse(fs.readFileSync(adminPath, 'utf-8'));
+    const currentData = await redis.get('portfolio-admin') as any;
+    if (!currentData) {
+      return NextResponse.json(
+        { message: 'Admin data not found' },
+        { status: 404 }
+      );
+    }
+    
+    console.log('Current data:', currentData);
     
     // Update only name and username, keep password
     const updatedData = {
@@ -41,12 +58,14 @@ export async function POST(request: NextRequest) {
       username,
     };
 
-    fs.writeFileSync(adminPath, JSON.stringify(updatedData, null, 2));
+    console.log('Writing updated data:', updatedData);
+    await redis.set('portfolio-admin', updatedData);
     
     return NextResponse.json({ message: 'Settings updated successfully' });
   } catch (error) {
+    console.error('Settings update error:', error);
     return NextResponse.json(
-      { message: 'Failed to update settings' },
+      { message: 'Failed to update settings', error: String(error) },
       { status: 500 }
     );
   }

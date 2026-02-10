@@ -1,0 +1,39 @@
+✅ FONTS INSTALLED - Geist Sans & Geist Mono (via npm)
+
+📋 WHAT YOU NEED TO DO NOW:
+
+1. TEST THE DESIGN
+   cd portfolio-site
+   npm run dev
+   → Open http://localhost:3000
+
+2. OPTIONAL: Install Clash Display (for headings)
+   → Go to: https://www.fontshare.com/fonts/clash-display
+   → Download and extract ClashDisplay-Variable.woff2
+   → Place in: portfolio-site/public/fonts/ClashDisplay-Variable.woff2
+   → Site works fine without it (uses system fonts)
+
+3. UPDATE YOUR CONTENT in data/content.json:
+   - Change "Your Name" to "Md Jahin Sabur"
+   - Update email address
+   - Update location
+   - Update LinkedIn: https://www.linkedin.com/in/md-jahin-sabur
+   - Update GitHub URL
+   - Add your real projects
+   - Update experience
+
+4. REPLACE CV
+   → Replace portfolio-site/public/cv.pdf with your actual CV
+
+5. DEPLOY
+   npm run build
+   → Deploy to your hosting
+
+DESIGN CHANGES APPLIED:
+✅ Orange/Teal color scheme (engineering-inspired)
+✅ Geist Sans font (modern, technical)
+✅ Grid backgrounds (blueprint style)
+✅ Circuit-inspired animations
+✅ Technical badges and styling
+✅ Glass morphism effects
+✅ Monospace elements
