@@ -3,7 +3,8 @@
     "name": "Your Name",
     "title": "Electronics & Electrical Engineer",
     "subtitle": "Embedded Systems | IoT | Automation",
-    "description": "Building intelligent, sensor-driven systems that bridge the physical and digital worlds. Specialized in embedded hardware, IoT architectures, and renewable energy solutions for real-world impact."
+    "description": "Building intelligent, sensor-driven systems that bridge the physical and digital worlds. Specialized in embedded hardware, IoT architectures, and renewable energy solutions for real-world impact.",
+    "status": "System Online"
   },
   "about": {
     "summary": "I'm an Electronics & Electrical Engineer specializing in embedded systems, IoT, and renewable energy solutions. My work focuses on designing sensor-driven systems that solve real-world problems—from solar-powered EV charging stations to industrial predictive maintenance networks.",

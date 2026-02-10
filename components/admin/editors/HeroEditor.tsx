@@ -57,6 +57,22 @@ export default function HeroEditor({ content, setContent }: any) {
           className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none resize-none"
         />
       </div>
+
+      <div>
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+          Status Message
+        </label>
+        <input
+          type="text"
+          value={content.hero?.status || ''}
+          onChange={(e) => updateHero('status', e.target.value)}
+          placeholder="e.g., System Online, Available for Work, Open to Opportunities"
+          className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none"
+        />
+        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+          Appears below your name with a pulsing indicator. Leave empty to hide.
+        </p>
+      </div>
     </div>
   );
 }

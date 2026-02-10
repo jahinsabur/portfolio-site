@@ -99,12 +99,14 @@ export default function Hero() {
               <h1 className="text-6xl md:text-8xl font-bold text-slate-900 dark:text-white font-display tracking-tighter">
                 {content.name}
               </h1>
-              <div className="flex items-center gap-3 mt-2">
-                <div className="w-3 h-3 bg-accent-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-mono text-slate-500 dark:text-slate-400 uppercase tracking-widest">
-                  System Online
-                </span>
-              </div>
+              {content.status && (
+                <div className="flex items-center gap-3 mt-2">
+                  <div className="w-3 h-3 bg-accent-500 rounded-full animate-pulse"></div>
+                  <span className="text-sm font-mono text-slate-500 dark:text-slate-400 uppercase tracking-widest">
+                    {content.status}
+                  </span>
+                </div>
+              )}
             </div>
 
             {/* Title with monospace styling */}
