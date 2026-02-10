@@ -1,13 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { Redis } from '@upstash/redis';
 
-const adminPath = path.join(process.cwd(), 'data', 'admin.json');
+const redis = Redis.fromEnv();
 
 export async function POST(request: NextRequest) {
   try {
     const { username, password } = await request.json();
-    const admin = JSON.parse(fs.readFileSync(adminPath, 'utf-8'));
+    const admin = await redis.get('portfolio-admin') as any;
+
+    if (!admin) {
+      return NextResponse.json(
+        { message: 'Admin data not found' },
+        { status: 500 }
+      );
+    }
 
     if (username === admin.username && password === admin.password) {
       const response = NextResponse.json({ success: true });
@@ -25,6 +31,7 @@ export async function POST(request: NextRequest) {
       { status: 401 }
     );
   } catch (error) {
+    console.error('Login error:', error);
     return NextResponse.json(
       { message: 'Login failed' },
       { status: 500 }
